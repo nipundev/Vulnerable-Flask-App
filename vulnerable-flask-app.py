@@ -55,7 +55,7 @@ def get_users():
     try:
         hostname = request.args.get('hostname')
         command = "dig " + hostname
-        data = subprocess.check_output(command, shell=True)
+        data = subprocess.check_output(command, shell=False)
         return data
     except:
         data = str(hostname) + " username didn't found"
@@ -65,7 +65,7 @@ def get_users():
 def get_log():
     try:
         command="cat restapi.log"
-        data=subprocess.check_output(command,shell=True)
+        data=subprocess.check_output(command,shell=False)
         return data
     except:
         return jsonify(data="Command didn't run"), 200
@@ -116,7 +116,7 @@ def run_file():
     try:
         filename=request.args.get("filename")
         command="/bin/bash "+filename
-        data=subprocess.check_output(command,shell=True)
+        data=subprocess.check_output(command,shell=False)
         return data
     except:
         return jsonify(data="File failed to run"), 200
